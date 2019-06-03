@@ -14,6 +14,6 @@ export class Auth {
     @Column({ length: 60 })
     password: string;
 
-    @Column()
+    @Column({ type: "datetime", width: 6 })
     createTime: string;
 }
