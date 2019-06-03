@@ -5,13 +5,15 @@ export class Auth {
     @PrimaryGeneratedColumn()
     id: number;
   
-    @Column({ length: 500 })
-    name: string;
-  
-    @Column('text')
-    description: string;
-  
+    @Column({ length: 40 })
+    userName: string;
+
+    @Column('tinyint')
+    age: number;
+
+    @Column({ length: 60 })
+    password: string;
+
     @Column()
-    filename: string;
-  
+    createTime: string;
 }

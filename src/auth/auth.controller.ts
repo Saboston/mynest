@@ -6,7 +6,7 @@ export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
     @Get()
-    getUserData(): object {
+    getUserData(): {} {
     return this.authService.findAll();
   }
   
