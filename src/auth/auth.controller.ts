@@ -9,10 +9,5 @@ export class AuthController {
     getUserData(): {} {
     return this.authService.findAll();
   }
-  
-  @Get('list')
-    getList(): string {
-    return '123';
-  }
 
 }

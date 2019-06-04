@@ -3,16 +3,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { Connection } from 'typeorm';
-import { DatabaseMysqlModule }   from './config/database.module'
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { mysqlConfig } from './config/database'
 
 @Module({
   imports: [
-    DatabaseMysqlModule,
+    TypeOrmModule.forRoot(mysqlConfig),
     AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
-  constructor(private readonly connection: Connection) {}
- } 
+  constructor(private readonly connection: Connection) { }
+} 
