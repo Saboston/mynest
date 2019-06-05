@@ -10,7 +10,7 @@ export class AuthService {
     private readonly authRepository: Repository<Auth>,
   ) {}
 
-   findAll(): Promise<Auth[]> {
-    return  this.authRepository.find();
+   findAll(id:number): Promise<Auth[]> {
+    return  this.authRepository.find({id:id});
   }
 }
