@@ -11,7 +11,9 @@ export class AuthService {
     private readonly authRepository: Repository<Auth>,
   ) {}
 
-   findAll(id:number,userName:string): Promise<Auth[]> {
-    return  this.authRepository.find({id:id,userName:userName});
+  async findAll(params:GetUserDataDto):Promise<object> {
+    return {
+      a: await this.authRepository.find({userName:params.userName}),
+    }
   }
 }

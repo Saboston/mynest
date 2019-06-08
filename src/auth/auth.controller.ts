@@ -8,11 +8,11 @@ export class AuthController {
 
   @Get('getUserData')
     getUserData(@Query() query: GetUserDataDto) {
-    return this.authService.findAll(query.id,query.userName);
+    return this.authService.findAll(query);
   }
 
   @Get('getUserDatas/:id/:userName')
     getUserDatas(@Param() params:GetUserDataDto) {
-    return this.authService.findAll(params.id,params.userName);
+    return this.authService.findAll(params);
   }
 }
