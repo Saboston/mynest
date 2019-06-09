@@ -1,18 +1,18 @@
 import { Controller,Get,Query,Param } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { GetUserDataDto }  from './dto/getUserData.dto'
+import { GetUserDataDto,LoginDto }  from './dto/auth.dto'
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly authService: AuthService) {}
+    constructor( private readonly authService: AuthService ) {}
 
-  @Get('getUserData')
-    getUserData(@Query() query: GetUserDataDto) {
-    return this.authService.findAll(query);
-  }
+    @Get('login')
+    login(@Query() query:LoginDto) {
+      return this.authService.loginUser(query)
+    }
 
-  @Get('getUserDatas/:id/:userName')
+    @Get('getUserData/:id')
     getUserDatas(@Param() params:GetUserDataDto) {
-    return this.authService.findAll(params);
-  }
+      return this.authService.findUserData(params);
+    }
 }
