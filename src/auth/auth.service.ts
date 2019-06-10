@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Auth } from '../entity/auth.entity';
 import { GetUserDataDto,LoginDto }  from './dto/auth.dto'
+import { reqJson } from '../common/req.json'
 
 @Injectable()
 export class AuthService {
@@ -12,21 +13,24 @@ export class AuthService {
   ) {}
 
   async loginUser(query:LoginDto):Promise<object>{
-    let isUser=await this.authRepository.findOne({userName:query.userName,password:query.password});
+
+    let isUser:Auth=await this.authRepository.findOne({userName:query.userName,password:query.password});
     if(isUser){
-      return {
-        data:'登录成功！',
-      }   
+      return reqJson(200,isUser,'登录成功！')
     }else{
-      return {
-        data:"用户名或密码不正确！"
-      }  
+      return reqJson(201,isUser,"用户名或密码不正确！")
     }    
+
   }
 
   async findUserData(params:GetUserDataDto):Promise<object> {
-    return {
-      data: await this.authRepository.find({id:params.id}),
-    }
+
+    const user:Auth = await this.authRepository
+    .createQueryBuilder('user')
+    .select(['user.id','user.userName'])
+    .where("user.id = :id", { id: params.id })
+    .getOne();
+    return reqJson(200,user,'')
   }
+
 }

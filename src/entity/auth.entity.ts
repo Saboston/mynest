@@ -17,13 +17,16 @@ export class Auth {
     @Column({ type: "datetime", width: 6 })
     createTime: string;
 
-    @Column({ length: 60 })
+    @Column({ length: 60,nullable:true })
     company: string;
 
-    @Column({ length: 40 })
+    @Column({ length:40,nullable:true })
     email: string;
 
     @Column()
     phone: number;
+
+    @Column({ length:100,nullable:true })
+    address: string;
 
 }
