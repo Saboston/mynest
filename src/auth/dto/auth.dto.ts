@@ -5,3 +5,10 @@ export class LoginDto {
     readonly userName: string;
     readonly password:string;
 }
+
+export class RegisterDto {
+    readonly userName: string;
+    readonly password: string;
+    readonly confirmPass: string;
+    readonly phone: number;    
+}

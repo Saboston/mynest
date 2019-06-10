@@ -8,14 +8,14 @@ export class Auth {
     @Column({ length: 40 })
     userName: string;
 
-    @Column({ type: "tinyint", width: 4 })
+    @Column({ type: "tinyint", width: 4,nullable:true })
     age: number;
 
     @Column({ length: 60 })
     password: string;
 
-    @Column({ type: "datetime", width: 6 })
-    createTime: string;
+    @Column({ type: "datetime", width: 6,nullable:true})
+    createTime: Date;
 
     @Column({ length: 60,nullable:true })
     company: string;

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Auth } from '../entity/auth.entity';
-import { GetUserDataDto,LoginDto }  from './dto/auth.dto'
+import { GetUserDataDto,LoginDto,RegisterDto }  from './dto/auth.dto'
 import { reqJson } from '../common/req.json'
 
 @Injectable()
@@ -21,6 +21,11 @@ export class AuthService {
       return reqJson(201,isUser,"用户名或密码不正确！")
     }    
 
+  }
+
+  async registerUser(body:RegisterDto):Promise<object>{
+    let user:Auth=await this.authRepository.save(body)
+    return reqJson(200,user,"注册成功！")
   }
 
   async findUserData(params:GetUserDataDto):Promise<object> {
