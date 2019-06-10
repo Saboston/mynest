@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { Connection } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UtilsModule } from './utils/utils.module';
 
 @Module({
   imports: [
@@ -18,7 +17,6 @@ import { UtilsModule } from './utils/utils.module';
       entities: ['src/entity/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
-    UtilsModule,
     AuthModule,
   ],
   controllers: [AppController],
