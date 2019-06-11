@@ -12,3 +12,8 @@ export class RegisterDto {
     readonly confirmPass: string;
     readonly phone: number;    
 }
+
+export class NickNameDto {
+    readonly nickName:string;
+    readonly id:number;    
+}
