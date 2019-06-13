@@ -21,11 +21,17 @@ export class AuthService {
   }
 
   async findUserData(params:GetUserDataDto):Promise<object> {
-    let user:Auth = await this.authRepository
-    .createQueryBuilder('user')
-    .select(['user.id','user.userName'])
-    .where("user.id = :id", { id: params.id })
-    .getOne();
+    // let user = await this.authRepository
+    // .createQueryBuilder('user')
+    // .select(['user.id','user.userName'])
+    // .where("user.id = :id", { id: params.id })
+    // .getOne();
+    let user = await this.authRepository.findOne({
+      select:['id','userName'],
+      where:[
+        {id:params.id}
+      ]
+    })
     return reqJson(200,user,'')
   }
 
