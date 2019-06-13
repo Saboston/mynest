@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
 import { Connection } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './front/auth/auth.module';
+import { BannerModule } from './admin/banner/banner.module';
 
 @Module({
   imports: [
@@ -14,13 +13,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'root',
       password: 'golden66',
       database: 'mynest',
-      entities: ['src/entity/**/*.entity{.ts,.js}'],
+      entities: ['src/mysql_entity/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     AuthModule,
+    BannerModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {
   constructor(private readonly connection: Connection) { }

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Auth } from '../entity/auth.entity';
+import { Auth } from '../../mysql_entity/auth.entity';
 import { GetUserDataDto,LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
-import { reqJson } from '../common/req.json'
+import { reqJson } from '../../common/req.json'
 
 @Injectable()
 export class AuthService {

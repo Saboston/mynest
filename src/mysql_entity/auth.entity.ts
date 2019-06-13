@@ -38,6 +38,10 @@ export class Auth {
     @Column({nullable:true})
     phone: number;
 
+    //头像
+    @Column({nullable:true})
+    avatar: string;
+
     //地址
     @Column({ length:100,nullable:true })
     address: string;

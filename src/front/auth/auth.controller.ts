@@ -1,7 +1,7 @@
 import { Controller,Get,Post,Query,Param,Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { GetUserDataDto,LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
-import { reqJson } from '../common/req.json'
+import { reqJson } from '../../common/req.json'
 
 @Controller('auth')
 export class AuthController {
