@@ -8,6 +8,7 @@ import * as qiniu from 'qiniu';
 export class BannerController {
     constructor(private readonly bannerService: BannerService) {}
 
+    //获取图片
     @Get('getBanner')
     async getBanner(@Query() query:GetBannerDto):Promise<object>{
         let banners=await this.bannerService.getBanner(query);
@@ -18,6 +19,7 @@ export class BannerController {
         return reqJson(200,dataJson,"")
     }
 
+    //获取七牛云上传Token
     @Get('getUploadToken')
     getUploadToken():object{
         const accessKey = 'KWw9FSH5Q-HsUCk5eIn2VDxIcvKVyChB89a_rNzB';
@@ -33,6 +35,7 @@ export class BannerController {
         return reqJson(200,uploadToken,"")
     }
 
+    //删除七牛云资源
     @Post('deleteUploadFile')
     deleteUploadFile(){
         

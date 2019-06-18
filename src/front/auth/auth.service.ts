@@ -12,14 +12,17 @@ export class AuthService {
     private readonly authRepository: Repository<Auth>,
   ) {}
 
-  loginUser(query:LoginDto):Promise<Auth>{
+  //登录
+  loginUser(query:LoginDto):Promise<Auth>{    
    return  this.authRepository.findOne({userName:query.userName,password:query.password});
   }
 
+  //注册
    registerUser(body:RegisterDto):Promise<object>{
     return this.authRepository.save(body)
   }
 
+  //查询个人信息
   async findUserData(params:GetUserDataDto):Promise<object> {
     // let user = await this.authRepository
     // .createQueryBuilder('user')
@@ -35,6 +38,7 @@ export class AuthService {
     return reqJson(200,user,'')
   }
 
+  //更新昵称
   async updateNickName(query:NickNameDto):Promise<object>{
     let user=await this.authRepository.update({id:query.id},{nickName:query.nickName});    
     return reqJson(200,user,"修改成功！")

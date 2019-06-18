@@ -14,4 +14,8 @@ export class Banner {
      @Column({ length: 20 })
      type: string;
 
+    //备注
+    @Column({ length: 80 })
+    remark: string; 
+
 }

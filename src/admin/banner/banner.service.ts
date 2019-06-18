@@ -11,13 +11,14 @@ export class BannerService {
         private readonly bannerRepository: Repository<Banner>,
     ) {}
 
+    //获取图片
     async getBanner(query:GetBannerDto):Promise<[Banner[],number]>{
         let data= await this.bannerRepository.findAndCount({
             where:[
                 {type:query.type}
             ],
-            skip: 2, 
-            take: 5
+            skip: ((query.page-1)||0)*query.size, 
+            take: query.size
         });
         return data;
     }

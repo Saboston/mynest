@@ -7,7 +7,7 @@ import { reqJson } from '../../common/req.json'
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
-    @Get('login')
+    @Get('login')     //登录
     async login(@Query() query:LoginDto):Promise<object> {
       let login=await this.authService.loginUser(query);
       if(login){
@@ -17,19 +17,19 @@ export class AuthController {
       }    
     }
 
-    @Get('getUserData/:id')
+    @Get('getUserData/:id')   //查询个人信息
     getUserDatas(@Param() params:GetUserDataDto):object {
       return this.authService.findUserData(params);
     }
 
     
-    @Post('register')
+    @Post('register')   //注册
     async registerUser(@Body() body:RegisterDto):Promise<object> {
       let register = await this.authService.registerUser(body);
       return reqJson(200,register,"注册成功！")
     }
 
-    @Get('updateNickName')
+    @Get('updateNickName')    //更新昵称
     updateNickName(@Query() query:NickNameDto):object {      
       return this.authService.updateNickName(query);
     }
