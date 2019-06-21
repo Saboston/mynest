@@ -6,16 +6,7 @@ import { BannerModule } from './admin/banner/banner.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: '188.131.168.95',
-      port: 3306,
-      username: 'root',
-      password: 'golden66',
-      database: 'mynest',
-      entities: ['src/mysql_entity/**/*.entity{.ts,.js}'],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(),
     AuthModule,
     BannerModule
   ],

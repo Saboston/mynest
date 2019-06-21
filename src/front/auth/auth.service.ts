@@ -10,6 +10,7 @@ export class AuthService {
   constructor(
     @InjectRepository(Auth)
     private readonly authRepository: Repository<Auth>,
+    
   ) {}
 
   //登录
