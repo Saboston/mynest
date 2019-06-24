@@ -4,18 +4,35 @@ import { Repository } from 'typeorm';
 import { Auth } from '../../mysql_entity/auth.entity';
 import { GetUserDataDto,LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
 import { reqJson } from '../../common/req.json'
+import { JwtService } from '@nestjs/jwt';
+import { JwtPayload } from './interfaces/auth.interfaces';
 
 @Injectable()
 export class AuthService {
+  
   constructor(
+    private readonly jwtService: JwtService,
     @InjectRepository(Auth)
     private readonly authRepository: Repository<Auth>,
-    
+
   ) {}
 
-  //登录
-  loginUser(query:LoginDto):Promise<Auth>{    
-   return  this.authRepository.findOne({userName:query.userName,password:query.password});
+  //生成token
+  async signIn(id:number): Promise<string> {
+    // In the real-world app you shouldn't expose this method publicly
+    // instead, return a token once you verify user credentials
+    const user: JwtPayload = await { id: id };   
+    return this.jwtService.sign(user);
+  }
+
+  //验证token
+  async validateUser(payload: JwtPayload): Promise<any> {
+    return  this.authRepository.findOne({id:payload.id});
+  }
+
+  //查找用户
+  findUser(query:LoginDto):Promise<Auth>{    
+   return  this.authRepository.findOne(query);
   }
 
   //注册
