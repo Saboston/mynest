@@ -14,25 +14,24 @@ export class AuthController {
 
     @Get('login')     //登录
     async login(@Query() query:LoginDto):Promise<object> {
-      const data={
+      const data={ 
         token:""
       };
       const user= await this.authService.findUser(query);
       if(user){
-        data.token=await this.authService.signIn(user.id);
+        data.token= 'Bearer '+ await this.authService.signIn(user.id);
         return reqJson(200,data,'登录成功！')
       }else{
         return reqJson(201,data,"用户名或密码不正确！")
       }
     }
 
-    @Get('getUserData/:id')   //查询个人信息
-    getUserDatas(@Param() params:GetUserDataDto):object {
-      console.log();
-      return this.authService.findUserData(params);
+    @UseGuards(AuthGuard())
+    @Get('getUserData')   //查询个人信息
+    getUserDatas(@AuthUser() user: Auth):Promise<object> {
+      return  this.authService.findUserData(user)
     }
 
-    
     @Post('register')   //注册
     async registerUser(@Body() body:RegisterDto):Promise<object> {
       let register = await this.authService.registerUser(body);

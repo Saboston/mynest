@@ -15,5 +15,4 @@ export class RegisterDto {
 
 export class NickNameDto {
     readonly nickName:string;
-    readonly id:number;    
 }

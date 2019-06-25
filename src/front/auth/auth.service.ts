@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   //查找用户
-  findUser(query:LoginDto):Promise<Auth>{    
+  findUser(query:LoginDto):Promise<Auth>{  
    return  this.authRepository.findOne(query);
   }
 
@@ -41,26 +41,31 @@ export class AuthService {
   }
 
   //查询个人信息
-  async findUserData(params:GetUserDataDto):Promise<object> {
+  async findUserData(user:Auth):Promise<object> {
     // let user = await this.authRepository
     // .createQueryBuilder('user')
     // .select(['user.id','user.userName'])
     // .where("user.id = :id", { id: params.id })
     // .getOne();
-    let user = await this.authRepository.findOne({
+
+    let userData = await this.authRepository.findOne({
       select:['id','userName'],
       where:[
-        {id:params.id}
+        {id:user.id}
       ]
     })
-    return reqJson(200,user,'')
+    return reqJson(200,userData,'')
   }
 
   //更新昵称
   async updateNickName(query:NickNameDto,user:Auth):Promise<object>{
-    let useData=await this.authRepository.update({id:query.id},{nickName:query.nickName});    
-    console.log(user);
-    return reqJson(200,useData,"修改成功！")
+    let useData=await this.authRepository.update({id:user.id},{nickName:query.nickName});
+    if(useData){
+      return reqJson(200,null,"修改成功！")
+    }else{
+      return reqJson(200,null,"修改失败！")
+    }
+
   }
 
 }
