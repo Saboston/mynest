@@ -57,9 +57,10 @@ export class AuthService {
   }
 
   //更新昵称
-  async updateNickName(query:NickNameDto):Promise<object>{
-    let user=await this.authRepository.update({id:query.id},{nickName:query.nickName});    
-    return reqJson(200,user,"修改成功！")
+  async updateNickName(query:NickNameDto,user:Auth):Promise<object>{
+    let useData=await this.authRepository.update({id:query.id},{nickName:query.nickName});    
+    console.log(user);
+    return reqJson(200,useData,"修改成功！")
   }
 
 }

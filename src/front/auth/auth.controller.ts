@@ -3,6 +3,9 @@ import { AuthService } from './auth.service';
 import { GetUserDataDto,LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
 import { reqJson } from '../../common/req.json'
 import { AuthGuard } from '@nestjs/passport';
+import { AuthUser } from '../../shared/decorators/user.decorator'
+import { Auth } from '../../mysql_entity/auth.entity';
+
 @Controller('auth')
 export class AuthController {
     constructor(
@@ -38,8 +41,11 @@ export class AuthController {
 
     @Get('updateNickName')    //更新昵称
     @UseGuards(AuthGuard())
-    updateNickName(@Query() query:NickNameDto):object {      
-      return this.authService.updateNickName(query);
+    async updateNickName(
+      @Query() query:NickNameDto,
+      @AuthUser() user: Auth,
+      ):Promise<object> {            
+      return this.authService.updateNickName(query,user);
     }
 
 }
