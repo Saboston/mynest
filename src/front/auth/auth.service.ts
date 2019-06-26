@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Auth } from '../../mysql_entity/auth.entity';
-import { GetUserDataDto,LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
+import { LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
 import { reqJson } from '../../common/req.json'
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/auth.interfaces';

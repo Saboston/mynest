@@ -1,17 +1,20 @@
 import { Controller,Get,Post,Query,Param,Body,UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { GetUserDataDto,LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
+import { LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
 import { reqJson } from '../../common/req.json'
 import { AuthGuard } from '@nestjs/passport';
 import { AuthUser } from '../../shared/decorators/user.decorator'
 import { Auth } from '../../mysql_entity/auth.entity';
+import { ApiBearerAuth,ApiOperation } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @Controller('auth')
 export class AuthController {
     constructor(
-      private readonly authService: AuthService,
+      private readonly authService: AuthService
       ) {}
-
+    
+    @ApiOperation({title:"用户登录",description:"12312312"})
     @Get('login')     //登录
     async login(@Query() query:LoginDto):Promise<object> {
       const data={ 
@@ -32,6 +35,7 @@ export class AuthController {
       return  this.authService.findUserData(user)
     }
 
+    
     @Post('register')   //注册
     async registerUser(@Body() body:RegisterDto):Promise<object> {
       let register = await this.authService.registerUser(body);
