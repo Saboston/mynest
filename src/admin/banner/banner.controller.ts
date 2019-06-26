@@ -22,17 +22,17 @@ export class BannerController {
     //获取七牛云上传Token
     @Get('getUploadToken')
     getUploadToken():object{
-        const accessKey = 'KWw9FSH5Q-HsUCk5eIn2VDxIcvKVyChB89a_rNzB';
-        const secretKey = 'eA-Shnk9pGQlbVxzHx2qpWhhl-hgforCD8MNRuFx';
-        const bucket = 'image';        
+        const accessKey = 'KBgFQLzEfGyMuBNWFfizvIzy7H9IBduu2phvaKrx';
+        const secretKey = '9pOOoMrviUr7XSAQtPtSdkOvWhkMSdhHWGylZAB4';
+        const bucket = 'media';
         let mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
         let options = {
             scope: bucket,
             expires: 3600 * 24
         };
         let putPolicy =  new qiniu.rs.PutPolicy(options);
-        let uploadToken= putPolicy.uploadToken(mac);
-        return reqJson(200,uploadToken,"")
+        let pathUrl:any = putPolicy.uploadToken(mac);
+        return reqJson(200,pathUrl,"")
     }
 
     //删除七牛云资源
