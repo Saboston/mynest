@@ -1,5 +1,5 @@
 export interface JwtPayload {
     id: number;
-    iat?:string,
-    exp?:string
+    iat?:number,    //创建时间
+    exp?:number     //过期时间
 }

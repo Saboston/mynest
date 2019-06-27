@@ -6,6 +6,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AuthUser } from '../../shared/decorators/user.decorator'
 import { Auth } from '../../mysql_entity/auth.entity';
 import { ApiBearerAuth,ApiOperation } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
 
 @ApiBearerAuth()
 @Controller('auth')
@@ -14,8 +15,8 @@ export class AuthController {
       private readonly authService: AuthService
       ) {}
     
-    @ApiOperation({title:"用户登录",description:"12312312"})
-    @Get('login')     //登录
+    @ApiOperation({title:"用户登录"})
+    @Get('login')
     async login(@Query() query:LoginDto):Promise<object> {
       const data={ 
         token:""
@@ -29,20 +30,22 @@ export class AuthController {
       }
     }
 
-    @UseGuards(AuthGuard())
-    @Get('getUserData')   //查询个人信息
-    getUserDatas(@AuthUser() user: Auth):Promise<object> {
+    @ApiOperation({title:"查询个人信息"})
+    @Get('getUserData')
+    @UseGuards(JwtAuthGuard)
+    getUserDatas(@AuthUser() user: Auth):Promise<object> {  
       return  this.authService.findUserData(user)
     }
 
-    
-    @Post('register')   //注册
+    @ApiOperation({title:"注册"})
+    @Post('register')
     async registerUser(@Body() body:RegisterDto):Promise<object> {
       let register = await this.authService.registerUser(body);
       return reqJson(200,register,"注册成功！")
     }
 
-    @Get('updateNickName')    //更新昵称
+    @ApiOperation({title:"更新昵称"})
+    @Get('updateNickName')
     @UseGuards(AuthGuard())
     async updateNickName(
       @Query() query:NickNameDto,

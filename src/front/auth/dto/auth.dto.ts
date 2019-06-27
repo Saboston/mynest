@@ -8,7 +8,6 @@ export class LoginDto {
     readonly password:string;
 }
 
-
 export class RegisterDto {
     @ApiModelProperty()
     readonly userName: string;

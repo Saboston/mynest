@@ -19,14 +19,16 @@ export class AuthService {
 
   //生成token
   async signIn(id:number): Promise<string> {
-    // In the real-world app you shouldn't expose this method publicly
-    // instead, return a token once you verify user credentials
     const user: JwtPayload = await { id: id };   
     return this.jwtService.sign(user);
   }
 
   //验证token
   async validateUser(payload: JwtPayload): Promise<any> {
+    if(payload.exp-payload.iat<1800){
+      const token = this.signIn(payload.id);
+      
+     }
     return  this.authRepository.findOne({id:payload.id});
   }
 

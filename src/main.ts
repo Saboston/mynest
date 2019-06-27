@@ -7,6 +7,7 @@ async function bootstrap() {
   
   const options = new DocumentBuilder()   //swagger
   .setTitle('nest项目/api文档')
+  .setBasePath('')
   .setDescription('api文档')
   .addBearerAuth()
   .setVersion('1.0')
