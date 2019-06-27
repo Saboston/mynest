@@ -1,4 +1,4 @@
-import { Controller,Get,Post,Query,Param,Body,UseGuards } from '@nestjs/common';
+import { Controller,Get,Post,Query,Param,Body,Req,Res,UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
 import { reqJson } from '../../common/req.json'
@@ -7,6 +7,7 @@ import { AuthUser } from '../../shared/decorators/user.decorator'
 import { Auth } from '../../mysql_entity/auth.entity';
 import { ApiBearerAuth,ApiOperation } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
+import { Response,Request  } from 'express';
 
 @ApiBearerAuth()
 @Controller('auth')
@@ -17,16 +18,15 @@ export class AuthController {
     
     @ApiOperation({title:"用户登录"})
     @Get('login')
-    async login(@Query() query:LoginDto):Promise<object> {
-      const data={ 
-        token:""
-      };
+    async login(@Query() query:LoginDto,@Res() res:Response):Promise<object> {
+      let token:string;
       const user= await this.authService.findUser(query);
       if(user){
-        data.token= 'Bearer '+ await this.authService.signIn(user.id);
-        return reqJson(200,data,'登录成功！')
+        token= 'Bearer '+ await this.authService.signIn(user.id);
+        res.cookie("Authorization", token, {maxAge: 60 * 1000})
+        res.send(reqJson(200,null,'登录成功！'));
       }else{
-        return reqJson(201,data,"用户名或密码不正确！")
+        return reqJson(201,null,"用户名或密码不正确！")
       }
     }
 
