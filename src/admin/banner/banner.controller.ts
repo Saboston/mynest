@@ -22,8 +22,8 @@ export class BannerController {
     //获取七牛云上传Token
     @Get('getUploadToken')
     getUploadToken():object{
-        const accessKey = 'KBgFQLzEfGyMuBNWFfizvIzy7H9IBduu2phvaKrx';
-        const secretKey = '9pOOoMrviUr7XSAQtPtSdkOvWhkMSdhHWGylZAB4';
+        const accessKey = process.env.QINIU_ACCESSKEY;
+        const secretKey = process.env.QINIU_SECRETKEY;
         const bucket = 'media';
         let mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
         let options = {
