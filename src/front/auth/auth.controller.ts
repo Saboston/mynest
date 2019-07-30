@@ -1,13 +1,13 @@
 import { Controller,Get,Post,Query,Param,Body,Req,Res,UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
+import { LoginDto,RegisterDto,NickNameDto,sendUserDataDto,wxUserDataDto }  from './dto/auth.dto'
 import { reqJson } from '../../common/req.json'
 import { AuthGuard } from '@nestjs/passport';
 import { AuthUser } from '../../shared/decorators/user.decorator'
 import { Auth } from '../../mysql_entity/auth.entity';
 import { ApiBearerAuth,ApiOperation } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard'
-import { Response,Request  } from 'express';
+import { Response,Request } from 'express';
 
 @ApiBearerAuth()
 @Controller('auth')
@@ -37,6 +37,26 @@ export class AuthController {
       return  this.authService.findUserData(user)
     }
 
+    @ApiOperation({title:"微信小程序登录时发送个人信息"})
+    @Post('sendUserData')
+    sendUserDatas(@Body() body:sendUserDataDto):Promise<object> {
+      let userData=body.userInfo;
+      switch(userData.gender) {
+        case 0:
+          userData.sex='未知'
+          break;
+        case 1:
+          userData.sex='男'
+          break;        
+        case 1:
+          userData.sex='女'
+          break;
+        default:
+          userData.sex='未知'
+      }
+      return  this.authService.saveUserData(userData)
+    } 
+ 
     @ApiOperation({title:"注册"})
     @Post('register')
     async registerUser(@Body() body:RegisterDto):Promise<object> {

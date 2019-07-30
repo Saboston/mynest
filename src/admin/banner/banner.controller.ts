@@ -35,10 +35,4 @@ export class BannerController {
         return reqJson(200,pathUrl,"")
     }
 
-    //删除七牛云资源
-    @Post('deleteUploadFile')
-    deleteUploadFile(){
-        
-    }
-
 }
