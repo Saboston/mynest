@@ -17,7 +17,6 @@ import { JwtStrategy } from './jwt/jwt.strategy';
       },
     }),  
     TypeOrmModule.forFeature([Auth]),
-    
   ],
   controllers: [AuthController],
   providers: [AuthService,JwtStrategy],

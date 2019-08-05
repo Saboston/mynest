@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Auth } from '../../mysql_entity/auth.entity';
-import { LoginDto,RegisterDto,NickNameDto,wxUserDataDto }  from './dto/auth.dto'
+import { LoginDto,RegisterDto,NickNameDto }  from './dto/auth.dto'
 import { reqJson } from '../../common/req.json'
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/auth.interfaces';
@@ -19,7 +19,7 @@ export class AuthService {
 
   //生成token
   async signIn(id:number): Promise<string> {
-    const user: JwtPayload = await { id: id };   
+    const user: JwtPayload = { id: id };   
     return this.jwtService.sign(user);
   }
 
@@ -27,7 +27,7 @@ export class AuthService {
   async validateUser(payload: JwtPayload): Promise<any> {
     if(payload.exp-payload.iat<1800){
       const token = this.signIn(payload.id);
-      
+        
      }
     return  this.authRepository.findOne({id:payload.id});
   }
@@ -56,11 +56,6 @@ export class AuthService {
       ]
     })
     return reqJson(200,userData,'')
-  }
-
-  //保存微信发送的个人信息
-  async saveUserData(userInfo:wxUserDataDto):Promise<object> {
-    return this.authRepository.save(userInfo)
   }
 
   //更新昵称

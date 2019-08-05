@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './front/auth/auth.module';
 import { BannerModule } from './admin/banner/banner.module';
 import { ConfigModule,ConfigService } from 'nestjs-config';
+import { WxModule } from './front/wx/wx.module';
 import * as path from 'path';
 
 @Module({
@@ -14,7 +15,8 @@ import * as path from 'path';
       inject: [ConfigService],
     }),
     AuthModule,
-    BannerModule
+    BannerModule,
+    WxModule
   ],
   controllers: [],
   providers: [],
