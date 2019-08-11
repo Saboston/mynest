@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { Connection } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './front/auth/auth.module';
-import { BannerModule } from './admin/banner/banner.module';
+import { BannerModule } from './front/banner/banner.module';
 import { ConfigModule,ConfigService } from 'nestjs-config';
 import { WxModule } from './front/wx/wx.module';
 import * as path from 'path';
