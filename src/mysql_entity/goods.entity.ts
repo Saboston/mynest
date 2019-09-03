@@ -1,21 +1,21 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Banner {
+export class Goods {
     //ID
     @PrimaryGeneratedColumn()
     id: number;
 
-    //图片地址
+    //类型
     @Column({ length: 80 })
     imgUrl: string;
 
-    //图片所属类别
-    @Column({ length: 20 })
-    type: string;
+    //类别
+    @Column({ type: "tinyint", width: 4 })
+    category: number;
 
-    //备注
-    @Column({ length: 80 })
-    remark: string;
+    //名称
+    @Column({ length: 40 })
+    name: string;
 
 }

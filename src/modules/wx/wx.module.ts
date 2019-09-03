@@ -3,7 +3,7 @@ import { SigntureController } from './wx.controller';
 import { SigntureService } from './wx.service';
 
 @Module({
-    controllers:[SigntureController],
-    providers:[SigntureService]
+    controllers: [SigntureController],
+    providers: [SigntureService]
 })
-export class WxModule {}
+export class WxModule { }

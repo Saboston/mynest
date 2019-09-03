@@ -1,12 +1,12 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class GetBannerDto{
+export class GetGoodsDto {
     @ApiModelProperty()
-    readonly type:string;
+    readonly category: number;
 
     @ApiModelProperty()
-    readonly page:number;
+    readonly page?: number;
 
     @ApiModelProperty()
-    readonly size:number;
+    readonly size?: number;
 }

@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { Connection } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './front/auth/auth.module';
-import { BannerModule } from './front/banner/banner.module';
-import { ConfigModule,ConfigService } from 'nestjs-config';
-import { WxModule } from './front/wx/wx.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { BannerModule } from './modules/banner/banner.module';
+import { MenuModule } from './modules/menu/menu.module';
+import { GoodsModule } from './modules/goods/goods.module';
+import { ConfigModule, ConfigService } from 'nestjs-config';
+import { WxModule } from './modules/wx/wx.module';
 import * as path from 'path';
 
 @Module({
@@ -16,6 +18,8 @@ import * as path from 'path';
     }),
     AuthModule,
     BannerModule,
+    MenuModule,
+    GoodsModule,
     WxModule
   ],
   controllers: [],

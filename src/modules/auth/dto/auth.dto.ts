@@ -1,11 +1,11 @@
-import { ApiModelProperty,ApiModelPropertyOptional } from '@nestjs/swagger';
+import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 
 export class LoginDto {
-    @ApiModelProperty({description:"必填"})
+    @ApiModelProperty({ description: "必填" })
     readonly userName: string;
 
     @ApiModelProperty()
-    readonly password:string;
+    readonly password: string;
 }
 
 export class RegisterDto {
@@ -24,5 +24,5 @@ export class RegisterDto {
 
 export class NickNameDto {
     @ApiModelProperty()
-    readonly nickName:string;
+    readonly nickName: string;
 }
