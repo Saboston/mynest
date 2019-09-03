@@ -1,9 +1,11 @@
 import { Module } from '@nestjs/common';
-import { SigntureController } from './wx.controller';
-import { SigntureService } from './wx.service';
+import { WxController } from './wx.controller';
+import { WxService } from './wx.service';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-    controllers: [SigntureController],
-    providers: [SigntureService]
+    imports: [AuthModule],
+    controllers: [WxController],
+    providers: [WxService,]
 })
 export class WxModule { }

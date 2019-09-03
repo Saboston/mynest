@@ -17,7 +17,7 @@ export class GoodsController {
             list: goods[0],
             totalCount: goods[1]
         }
-        return reqJson(200, dataJson, "")
+        return reqJson(dataJson, 200, "")
     }
 
 }

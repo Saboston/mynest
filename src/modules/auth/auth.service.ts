@@ -2,8 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Auth } from '../../mysql_entity/auth.entity';
-import { LoginDto, RegisterDto, NickNameDto } from './dto/auth.dto'
-import { reqJson } from '../../common/req.json'
+import { LoginDto, RegisterDto, NickNameDto } from './dto/auth.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './interfaces/auth.interfaces';
 
@@ -14,7 +13,6 @@ export class AuthService {
     private readonly jwtService: JwtService,
     @InjectRepository(Auth)
     private readonly authRepository: Repository<Auth>,
-
   ) { }
 
   //生成token
@@ -33,13 +31,13 @@ export class AuthService {
   }
 
   //查找用户
-  findUser(query: LoginDto): Promise<Auth> {
-    return this.authRepository.findOne(query);
+  async findUser(query: LoginDto): Promise<Auth> {
+    return await this.authRepository.findOne(query);
   }
 
   //保存用户信息
-  registerUser(body: RegisterDto): Promise<object> {
-    return this.authRepository.save(body)
+  async registerUser(body: RegisterDto): Promise<object> {
+    return await this.authRepository.save(body)
   }
 
   //查询个人信息
@@ -49,24 +47,22 @@ export class AuthService {
     // .select(['user.id','user.userName'])
     // .where("user.id = :id", { id: params.id })
     // .getOne();
-    let userData = await this.authRepository.findOne({
-      select: ['id', 'userName'],
+    return this.authRepository.findOne({
+      select: ['id', 'nickName'],
       where: [
         { id: user.id }
       ]
     })
-    return reqJson(200, userData, '')
+
   }
 
   //更新昵称
   async updateNickName(query: NickNameDto, user: Auth): Promise<object> {
-    let useData = await this.authRepository.update({ id: user.id }, { nickName: query.nickName });
-    if (useData) {
-      return reqJson(200, null, "修改成功！")
-    } else {
-      return reqJson(200, null, "修改失败！")
-    }
-
+    return this.authRepository.update({ id: user.id }, { nickName: query.nickName });
   }
 
+  //查找openId
+  async searchOpenId(openid: string): Promise<Auth> {
+    return await this.authRepository.findOne({ openid: openid })
+  }
 }

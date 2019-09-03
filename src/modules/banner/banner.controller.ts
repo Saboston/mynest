@@ -18,7 +18,7 @@ export class BannerController {
             list: banners[0],
             totalCount: banners[1]
         }
-        return reqJson(200, dataJson, "")
+        return reqJson(dataJson, 200, "")
     }
 
     @ApiOperation({ title: "获取图片类型" })
@@ -29,14 +29,14 @@ export class BannerController {
             list: bannersTypes[0],
             totalCount: bannersTypes[1]
         }
-        return reqJson(200, dataJson, "")
+        return reqJson(dataJson, 200, "")
     }
 
     @ApiOperation({ title: "保存图片信息" })
     @Post('saveBanner')
     async saveBanner(@Body() body: SaveBannerDto): Promise<object> {
         let resultBanner = await this.bannerService.saveBannerData(body);
-        return reqJson(200, resultBanner, "上传成功！")
+        return reqJson(resultBanner, 200, "上传成功！")
     }
 
     @ApiOperation({ title: "获取七牛云上传Token" })
@@ -52,7 +52,7 @@ export class BannerController {
         };
         let putPolicy = new qiniu.rs.PutPolicy(options);
         let pathUrl: string = putPolicy.uploadToken(mac);
-        return reqJson(200, pathUrl, "")
+        return reqJson(pathUrl, 200, "")
     }
 
 }

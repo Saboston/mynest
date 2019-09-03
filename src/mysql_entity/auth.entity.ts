@@ -6,10 +6,6 @@ export class Auth {
     @PrimaryGeneratedColumn()
     id: number;
 
-    //用户名
-    @Column({ length: 40, nullable: true })
-    userName: string;
-
     //昵称
     @Column({ length: 60, nullable: true })
     nickName: string;
@@ -42,16 +38,8 @@ export class Auth {
     @Column({ type: "timestamp", nullable: true, onUpdate: "CURRENT_TIMESTAMP" })
     updatetime: string;
 
-    //国家
-    @Column({ length: 40, nullable: true })
-    country: string;
-
-    //省份
-    @Column({ length: 40, nullable: true })
-    province: string;
-
-    //城市
-    @Column({ length: 40, nullable: true })
-    city: string;
+    //openid
+    @Column({ length: 30, nullable: true })
+    openid: string;
 
 }

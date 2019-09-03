@@ -17,7 +17,7 @@ export class MenuController {
             list: menus[0],
             totalCount: menus[1]
         }
-        return reqJson(200, dataJson, "")
+        return reqJson(dataJson, 200, "")
     }
 
 }
