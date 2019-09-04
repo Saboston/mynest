@@ -1,7 +1,7 @@
 import { ApiModelProperty } from '@nestjs/swagger';
-import { PaginationDto } from '../../../common/pagination';
+import { PaginationOptionInterface } from '../../../common/pagination';
 
-export class GetBannerDto extends PaginationDto {
+export class GetBannerDto extends PaginationOptionInterface{
     @ApiModelProperty()
     readonly type: string;
 }

@@ -10,16 +10,7 @@ export class LoginDto {
 
 export class RegisterDto {
     @ApiModelProperty()
-    readonly userName: string;
-
-    @ApiModelProperty()
-    readonly password: string;
-
-    @ApiModelProperty()
-    readonly confirmPass: string;
-
-    @ApiModelProperty()
-    readonly phone: number;
+    readonly openid: string;
 }
 
 export class NickNameDto {

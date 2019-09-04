@@ -1,5 +1,5 @@
 import { Controller, Get, Query, Post, Body } from '@nestjs/common';
-import { reqJson } from '../../common/req.json';
+import { reqJson,reqInterface } from '../../common/req.json';
 import { GoodsService } from './goods.service';
 import { GetGoodsDto } from './dto/goods.dto';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
@@ -11,13 +11,16 @@ export class GoodsController {
 
     @ApiOperation({ title: "获取商品列表" })
     @Get('getGoods')
-    async getGoods(@Query() query: GetGoodsDto): Promise<object> {
+    async getGoods(@Query() query: GetGoodsDto): Promise<reqInterface> {
         let goods = await this.goodsService.getGoods(query);
-        let dataJson = {
-            list: goods[0],
-            totalCount: goods[1]
-        }
-        return reqJson(dataJson, 200, "")
+        return reqJson(goods, 200, "")
+    }
+
+    @ApiOperation({ title: "获取菜单栏" })
+    @Get('goodsHoneMenu')
+    async goodsHoneMenu(): Promise<reqInterface> {
+        let menus = await this.goodsService.goodsHoneMenu();
+        return reqJson(menus, 200, "")
     }
 
 }

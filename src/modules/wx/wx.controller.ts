@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Query, Param, Body, Req, Res } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { WxService } from './wx.service';
-import { reqJson } from '../../common/req.json';
+import { reqJson,reqInterface } from '../../common/req.json';
 import { AuthService } from '../auth/auth.service'
 
 @ApiBearerAuth()
@@ -14,12 +14,17 @@ export class WxController {
 
   @ApiOperation({ title: "上传code查询用户是否已注册" })
   @Get('wxIsRegiter')
-  async wxIsRegiter(@Query('code') code:string): Promise<object> {
+  async wxIsRegiter(@Query('code') code:string): Promise<reqInterface> {
     let code2Session = await this.wxService.getOpenId(code);
     if(code2Session){
       let openid = JSON.parse(code2Session).openid;
       let userData = await this.authService.searchOpenId(openid);
-      return reqJson(userData)
+      if(userData){
+        return reqJson(userData)
+      }else{
+        let result = await this.authService.registerUser;
+        return reqJson(result)
+      }
     }else{
       return reqJson(null,202,'不存在')
     }

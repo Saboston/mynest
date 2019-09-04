@@ -1,6 +1,6 @@
 import { Controller, Get, Query, Post, Body } from '@nestjs/common';
 import { GetBannerDto, SaveBannerDto } from './dto/banner.dto';
-import { reqJson } from '../../common/req.json';
+import { reqJson,reqInterface } from '../../common/req.json';
 import { BannerService } from './banner.service';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import * as qiniu from 'qiniu';
@@ -12,18 +12,14 @@ export class BannerController {
 
     @ApiOperation({ title: "获取图片" })
     @Get('getBanner')
-    async getBanner(@Query() query: GetBannerDto): Promise<object> {
+    async getBanner(@Query() query: GetBannerDto): Promise<reqInterface> {
         let banners = await this.bannerService.getBanner(query);
-        let dataJson = {
-            list: banners[0],
-            totalCount: banners[1]
-        }
-        return reqJson(dataJson, 200, "")
+        return reqJson(banners, 200, "")
     }
 
     @ApiOperation({ title: "获取图片类型" })
     @Get('getBannerTypes')
-    async getBannerTypes(@Query() query): Promise<object> {
+    async getBannerTypes(@Query() query): Promise<reqInterface> {
         let bannersTypes = await this.bannerService.getBannerTypes(query);
         let dataJson = {
             list: bannersTypes[0],
@@ -34,14 +30,14 @@ export class BannerController {
 
     @ApiOperation({ title: "保存图片信息" })
     @Post('saveBanner')
-    async saveBanner(@Body() body: SaveBannerDto): Promise<object> {
+    async saveBanner(@Body() body: SaveBannerDto): Promise<reqInterface> {
         let resultBanner = await this.bannerService.saveBannerData(body);
         return reqJson(resultBanner, 200, "上传成功！")
     }
 
     @ApiOperation({ title: "获取七牛云上传Token" })
     @Get('getUploadToken')
-    getUploadToken(): object {
+    getUploadToken(): reqInterface {
         const accessKey = process.env.QINIU_ACCESSKEY;
         const secretKey = process.env.QINIU_SECRETKEY;
         const bucket = 'media';

@@ -1,12 +1,7 @@
 import { ApiModelProperty } from '@nestjs/swagger';
+import { PaginationOptionInterface } from '../../../common/pagination';
 
-export class GetGoodsDto {
+export class GetGoodsDto extends PaginationOptionInterface {
     @ApiModelProperty()
     readonly category: number;
-
-    @ApiModelProperty()
-    readonly page?: number;
-
-    @ApiModelProperty()
-    readonly size?: number;
 }

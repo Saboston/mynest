@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Query, Param, Body, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginDto, RegisterDto, NickNameDto } from './dto/auth.dto'
+import { LoginDto, NickNameDto } from './dto/auth.dto'
 import { reqJson, reqInterface } from '../../common/req.json';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthUser } from '../../shared/decorators/user.decorator'
@@ -36,17 +36,10 @@ export class AuthController {
     return reqJson(userData)
   }
 
-  @ApiOperation({ title: "注册" })
-  @Post('register')
-  async registerUser(@Body() body: RegisterDto): Promise<reqInterface> {
-    let register = await this.authService.registerUser(body);
-    return reqJson(register, 200, "注册成功！")
-  }
-
   @ApiOperation({ title: "更新昵称" })
   @Get('updateNickName')
   @UseGuards(AuthGuard())
-  async updateNickName(@Query() query: NickNameDto, @AuthUser() user: Auth): Promise<object> {
+  async updateNickName(@Query() query: NickNameDto, @AuthUser() user: Auth): Promise<reqInterface> {
     let useData = await this.authService.updateNickName(query, user);
     if (useData) {
       return reqJson(null, 200, "修改成功！")

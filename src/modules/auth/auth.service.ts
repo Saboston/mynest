@@ -25,7 +25,6 @@ export class AuthService {
   async validateUser(payload: JwtPayload): Promise<any> {
     if (payload.exp - payload.iat < 1800) {
       const token = this.signIn(payload.id);
-
     }
     return this.authRepository.findOne({ id: payload.id });
   }
@@ -35,7 +34,7 @@ export class AuthService {
     return await this.authRepository.findOne(query);
   }
 
-  //保存用户信息
+  //根据openid注册账户
   async registerUser(body: RegisterDto): Promise<object> {
     return await this.authRepository.save(body)
   }
@@ -65,4 +64,5 @@ export class AuthService {
   async searchOpenId(openid: string): Promise<Auth> {
     return await this.authRepository.findOne({ openid: openid })
   }
+
 }

@@ -3,7 +3,6 @@ import { Connection } from 'typeorm';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { BannerModule } from './modules/banner/banner.module';
-import { MenuModule } from './modules/menu/menu.module';
 import { GoodsModule } from './modules/goods/goods.module';
 import { ConfigModule, ConfigService } from 'nestjs-config';
 import { WxModule } from './modules/wx/wx.module';
@@ -18,7 +17,6 @@ import * as path from 'path';
     }),
     AuthModule,
     BannerModule,
-    MenuModule,
     GoodsModule,
     WxModule
   ],
