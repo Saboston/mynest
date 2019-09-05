@@ -5,27 +5,31 @@ export class PaginationOptionInterface {
 
 export class PaginationResultInterface<PaginationEntity> {
     list: PaginationEntity[];
-    total: number
+    total: number;
 }
 
 export class PaginationResult<PaginationEntity>{
     public list: PaginationEntity[];
-    public total: number
+    public next: number;
+    public totalPages: number;
+    public total: number;
 
-    constructor(paginationResults: PaginationResultInterface<PaginationEntity>) {
+    constructor(query:PaginationOptionInterface,paginationResults: PaginationResultInterface<PaginationEntity>) {
         this.list = paginationResults.list;
+        this.totalPages = Math.ceil(paginationResults.total / query.limit) || 1;
+        this.next = this.totalPages>query.page?++query.page:0
         this.total = paginationResults.total;
     }
 }
 
-export class PaginationOption{
+export class PaginationOption {
     public skip: number;
     public take: number;
     public options: object;
-    
-    constructor(paginationOptions:PaginationOptionInterface,options?:object) {
+
+    constructor(paginationOptions: PaginationOptionInterface, options?: object) {
         this.skip = ((paginationOptions.page - 1) || 0) * paginationOptions.limit;
         this.take = paginationOptions.limit;
-        this.options = Object.assign(this,options);
+        this.options = Object.assign(this, options);
     }
 }

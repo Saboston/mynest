@@ -13,14 +13,14 @@ export class GoodsController {
     @Get('getGoods')
     async getGoods(@Query() query: GetGoodsDto): Promise<reqInterface> {
         let goods = await this.goodsService.getGoods(query);
-        return reqJson(goods, 200, "")
+        return new reqJson(goods, 200, "")
     }
 
     @ApiOperation({ title: "获取菜单栏" })
     @Get('goodsHoneMenu')
     async goodsHoneMenu(): Promise<reqInterface> {
         let menus = await this.goodsService.goodsHoneMenu();
-        return reqJson(menus, 200, "")
+        return new reqJson(menus, 200, "")
     }
 
 }

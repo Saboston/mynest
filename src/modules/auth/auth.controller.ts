@@ -22,9 +22,9 @@ export class AuthController {
     if (user) {
       token = 'Bearer ' + await this.authService.signIn(user.id);
       res.cookie("Authorization", token, { maxAge: 60 * 1000 })
-      res.send(reqJson(null, 200, '登录成功！'));
+      res.send(new reqJson(null, 200, '登录成功！'));
     } else {
-      return reqJson(null, 201, "用户名或密码不正确！")
+      return new reqJson(null, 201, "用户名或密码不正确！")
     }
   }
 
@@ -33,7 +33,7 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   async getUserDatas(@AuthUser() user: Auth): Promise<reqInterface> {
     let userData = await this.authService.findUserData(user);
-    return reqJson(userData)
+    return new reqJson(userData)
   }
 
   @ApiOperation({ title: "更新昵称" })
@@ -42,9 +42,9 @@ export class AuthController {
   async updateNickName(@Query() query: NickNameDto, @AuthUser() user: Auth): Promise<reqInterface> {
     let useData = await this.authService.updateNickName(query, user);
     if (useData) {
-      return reqJson(null, 200, "修改成功！")
+      return new reqJson(null, 200, "修改成功！")
     } else {
-      return reqJson(null, 200, "修改失败！")
+      return new reqJson(null, 200, "修改失败！")
     }
   }
 

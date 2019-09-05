@@ -20,13 +20,13 @@ export class WxController {
       let openid = JSON.parse(code2Session).openid;
       let userData = await this.authService.searchOpenId(openid);
       if(userData){
-        return reqJson(userData)
+        return new reqJson(userData)
       }else{
         let result = await this.authService.registerUser;
-        return reqJson(result)
+        return new reqJson(result)
       }
     }else{
-      return reqJson(null,202,'不存在')
+      return new reqJson(null,202,'不存在')
     }
   }
 

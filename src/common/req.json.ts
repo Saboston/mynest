@@ -4,10 +4,13 @@ export interface reqInterface {
     msg?: string
 }
 
-export function reqJson(data: any, code: number = 200, msg: string = "") {
-    return {
-        code: code,
-        data: data || null,
-        msg: msg
-    }
+export class reqJson{
+    public data:any;
+    public code:number;
+    public msg:string;
+    constructor(data: any, code: number = 200, msg: string = ""){
+        this.code = code,
+        this.data = data || null,
+        this.msg = msg
+    } 
 }

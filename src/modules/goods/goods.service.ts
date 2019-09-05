@@ -22,7 +22,7 @@ export class GoodsService {
                 where: [{ category: query.category }]
             })
         );
-        return new PaginationResult<Goods>({
+        return new PaginationResult<Goods>(query,{
             list,
             total,
         });

@@ -22,7 +22,7 @@ export class BannerService {
                 where: [{ type: query.type }]
             })
         );
-        return new PaginationResult<Banner>({
+        return new PaginationResult<Banner>(query, {
             list,
             total,
         });
@@ -33,7 +33,7 @@ export class BannerService {
         let [list, total] = await this.bannerTypesRepository.findAndCount(
             new PaginationOption(query)
         );
-        return new PaginationResult<BannerTypes>({
+        return new PaginationResult<BannerTypes>(query, {
             list,
             total,
         });
