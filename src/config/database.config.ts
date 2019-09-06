@@ -6,7 +6,8 @@ export default {
     password: process.env.TYPEORM_PASSWORD,
     database: process.env.TYPEORM_DATABASE,
     port: Number(process.env.TYPEORM_PORT),
-    logging: true,
-    entities: [resolve('src/mysql_entity/**/*.entity{.ts,.js}')],
+    entities: [
+        `${resolve(__dirname, '..')}${process.env.DB_ENTITIES}`,
+    ],
     synchronize: true,
 };

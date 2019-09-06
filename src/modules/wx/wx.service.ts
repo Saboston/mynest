@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { http } from '../../common/http';
-const sign = require('../../common/sign');
+//const sign = require('../../common/sign');
 
 @Injectable()
 export class WxService {

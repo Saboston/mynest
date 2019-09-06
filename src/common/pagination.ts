@@ -4,8 +4,8 @@ export class PaginationOptionInterface {
 }
 
 export class PaginationResultInterface<PaginationEntity> {
-    list: PaginationEntity[];
-    total: number;
+    list?: PaginationEntity[];
+    total?: number;
 }
 
 export class PaginationResult<PaginationEntity>{
@@ -14,8 +14,8 @@ export class PaginationResult<PaginationEntity>{
     public totalPages: number;
     public total: number;
 
-    constructor(query:PaginationOptionInterface,paginationResults: PaginationResultInterface<PaginationEntity>) {
-        this.list = paginationResults.list;
+    constructor(query?:PaginationOptionInterface,paginationResults?: PaginationResultInterface<PaginationEntity>) {
+        this.list = paginationResults.list || [];
         this.totalPages = Math.ceil(paginationResults.total / query.limit) || 1;
         this.next = this.totalPages>query.page?++query.page:0
         this.total = paginationResults.total;
@@ -23,9 +23,9 @@ export class PaginationResult<PaginationEntity>{
 }
 
 export class PaginationOption {
-    public skip: number;
-    public take: number;
-    public options: object;
+    public skip?: number;
+    public take?: number;
+    public options?: object;
 
     constructor(paginationOptions: PaginationOptionInterface, options?: object) {
         this.skip = ((paginationOptions.page - 1) || 0) * paginationOptions.limit;

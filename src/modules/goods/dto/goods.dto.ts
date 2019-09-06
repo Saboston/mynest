@@ -5,3 +5,8 @@ export class GetGoodsDto extends PaginationOptionInterface {
     @ApiModelProperty()
     readonly category: number;
 }
+
+export class SearchGoodsDto extends PaginationOptionInterface {
+    @ApiModelProperty()
+    readonly name: string;
+}

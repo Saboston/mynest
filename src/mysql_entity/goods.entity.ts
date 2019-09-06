@@ -18,4 +18,8 @@ export class Goods {
     @Column({ length: 40 })
     name: string;
 
+    //介绍
+    @Column({ type:"text",nullable:true})
+    description:string;
+
 }
