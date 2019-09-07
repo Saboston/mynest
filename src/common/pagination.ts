@@ -14,7 +14,7 @@ export class PaginationResult<PaginationEntity>{
     public totalPages: number;
     public total: number;
 
-    constructor(query?:PaginationOptionInterface,paginationResults?: PaginationResultInterface<PaginationEntity>) {
+    constructor(query:PaginationOptionInterface,paginationResults?: PaginationResultInterface<PaginationEntity>) {
         this.list = paginationResults.list || [];
         this.totalPages = Math.ceil(paginationResults.total / query.limit) || 1;
         this.next = this.totalPages>query.page?++query.page:0

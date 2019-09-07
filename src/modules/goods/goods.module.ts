@@ -3,10 +3,11 @@ import { GoodsController } from './goods.controller';
 import { GoodsService } from './goods.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Goods } from '../../mysql_entity/goods.entity';
-import { GoodsHoneMenu } from '../../mysql_entity/goodsHoneMenu.entity';
+import { GoodsHomeMenu } from '../../mysql_entity/goodsHomeMenu.entity';
+import { RecommendLabels } from '../../mysql_entity/recommendLables.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Goods,GoodsHoneMenu])],
+  imports: [TypeOrmModule.forFeature([Goods,GoodsHomeMenu,RecommendLabels])],
   controllers: [GoodsController],
   providers: [GoodsService]
 })

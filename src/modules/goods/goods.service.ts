@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository,Like } from 'typeorm';
 import { Goods } from '../../mysql_entity/goods.entity';
-import { GoodsHoneMenu } from '../../mysql_entity/goodsHoneMenu.entity';
+import { GoodsHomeMenu } from '../../mysql_entity/goodsHomeMenu.entity';
+import { RecommendLabels } from '../../mysql_entity/recommendLables.entity';
 import { GetGoodsDto,SearchGoodsDto } from './dto/goods.dto';
 import { PaginationResult, PaginationOption } from '../../common/pagination';
 
@@ -11,8 +12,10 @@ export class GoodsService {
     constructor(
         @InjectRepository(Goods)
         private readonly goodsRepository: Repository<Goods>,
-        @InjectRepository(GoodsHoneMenu)
-        private readonly menuRepository: Repository<GoodsHoneMenu>
+        @InjectRepository(GoodsHomeMenu)
+        private readonly menuRepository: Repository<GoodsHomeMenu>,
+        @InjectRepository(RecommendLabels)
+        private readonly RecLabelsRepository: Repository<RecommendLabels>
     ) { }
 
     //获取商品列表
@@ -29,7 +32,7 @@ export class GoodsService {
     }
 
     //获取菜单栏
-    async goodsHoneMenu(): Promise<GoodsHoneMenu[]> {
+    async goodsHoneMenu(): Promise<GoodsHomeMenu[]> {
         let result = await this.menuRepository.find();
         return result
     }
@@ -49,5 +52,14 @@ export class GoodsService {
                 total,
             });
         }
+    }
+
+    //搜索的推荐标签
+    async recommendLables(query):Promise<PaginationResult<RecommendLabels>>{
+            let [list, total] = await this.RecLabelsRepository.findAndCount();
+            return new PaginationResult<RecommendLabels>(query,{
+                list,
+                total,
+            });
     }
 }

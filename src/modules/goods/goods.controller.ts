@@ -17,8 +17,8 @@ export class GoodsController {
     }
 
     @ApiOperation({ title: "获取菜单栏" })
-    @Get('goodsHoneMenu')
-    async goodsHoneMenu(): Promise<reqInterface> {
+    @Get('goodsHomeMenu')
+    async goodsHomeMenu(): Promise<reqInterface> {
         let menus = await this.goodsService.goodsHoneMenu();
         return new reqJson(menus, 200, "")
     }
@@ -27,6 +27,13 @@ export class GoodsController {
     @Get('searchGoods')
     async searchGoods(@Query() query:SearchGoodsDto): Promise<reqInterface> {       
         let search = await this.goodsService.searchGoods(query);
+        return new reqJson(search, 200, "")
+    }
+
+    @ApiOperation({ title: "搜索推荐标签" })
+    @Get('recommendLabels')
+    async recommendLabels(@Query() query): Promise<reqInterface> {       
+        let search = await this.goodsService.recommendLables(query);
         return new reqJson(search, 200, "")
     }
 
