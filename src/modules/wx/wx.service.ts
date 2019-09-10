@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { http } from '../../common/http';
+import  http  from '../../common/http';
 //const sign = require('../../common/sign');
 
 @Injectable()
@@ -11,7 +11,8 @@ export class WxService {
     const appSecret = process.env.APPSECRET;
     let result;
     let url = `https://api.weixin.qq.com/sns/jscode2session?appid=${appID}&secret=${appSecret}&js_code=${code}&grant_type=authorization_code`;
-    await http(url).then(res => {
+    let requisition = new http(url);
+    await requisition.request().then(res => {
       result = res
     });
     return result
