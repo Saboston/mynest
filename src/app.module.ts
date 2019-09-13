@@ -4,8 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { BannerModule } from './modules/banner/banner.module';
 import { GoodsModule } from './modules/goods/goods.module';
-import { ConfigModule, ConfigService } from 'nestjs-config';
 import { WxModule } from './modules/wx/wx.module';
+import { OrderModule } from './modules/order/order.module';
+import { ServiceModule } from './modules/service/service.module';
+import { ConfigModule, ConfigService } from 'nestjs-config';
 import * as path from 'path';
 
 @Module({
@@ -18,7 +20,9 @@ import * as path from 'path';
     AuthModule,
     BannerModule,
     GoodsModule,
-    WxModule
+    WxModule,
+    OrderModule,
+    ServiceModule
   ],
   controllers: [],
   providers: [],

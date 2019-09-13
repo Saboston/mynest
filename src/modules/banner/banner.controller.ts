@@ -2,10 +2,9 @@ import { Controller, Get, Query, Post, Body } from '@nestjs/common';
 import { GetBannerDto, SaveBannerDto } from './dto/banner.dto';
 import { reqJson,reqInterface } from '../../common/req.json';
 import { BannerService } from './banner.service';
-import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { ApiOperation } from '@nestjs/swagger';
 import * as qiniu from 'qiniu';
 
-@ApiBearerAuth()
 @Controller('banner')
 export class BannerController {
     constructor(private readonly bannerService: BannerService) { }
