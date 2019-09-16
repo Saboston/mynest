@@ -1,9 +1,10 @@
 import { Controller, Get, Query, Post, Body } from '@nestjs/common';
 import { reqJson,reqInterface } from '../../common/req.json';
 import { OrderService } from './order.service';
-import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation,ApiUseTags } from '@nestjs/swagger';
 import { GetOrdersDto } from './dto/order.dto'
 
+@ApiUseTags('order')
 @ApiBearerAuth()
 @Controller('order')
 export class OrderController {

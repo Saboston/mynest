@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository,Like } from 'typeorm';
+import { Repository, Like } from 'typeorm';
 import { Goods } from '../../mysql_entity/goods.entity';
 import { GoodsHomeMenu } from '../../mysql_entity/goodsHomeMenu.entity';
 import { RecommendLabels } from '../../mysql_entity/recommendLables.entity';
-import { GetGoodsDto,SearchGoodsDto } from './dto/goods.dto';
+import { GetGoodsDto, SearchGoodsDto } from './dto/goods.dto';
 import { PaginationResult, PaginationOption } from '../../common/pagination';
 
 @Injectable()
@@ -21,11 +21,11 @@ export class GoodsService {
     //获取商品列表
     async getGoods(query: GetGoodsDto): Promise<PaginationResult<Goods>> {
         let [list, total] = await this.goodsRepository.findAndCount(
-            new PaginationOption(query,{
+            new PaginationOption(query, {
                 where: [{ category: query.category }]
             })
         );
-        return new PaginationResult<Goods>(query,{
+        return new PaginationResult<Goods>(query, {
             list,
             total,
         });
@@ -38,16 +38,16 @@ export class GoodsService {
     }
 
     //查新商品包括按条件筛选
-    async searchGoods(query:SearchGoodsDto):Promise<PaginationResult<Goods>>{
-        if(query.name===''){
+    async searchGoods(query: SearchGoodsDto): Promise<PaginationResult<Goods>> {
+        if (query.name === '') {
             return new PaginationResult<Goods>(query);
-        }else{
+        } else {
             let [list, total] = await this.goodsRepository.findAndCount(
                 new PaginationOption(query,{
-                    where: [{ name: Like(`${query.name || ''}%`) }]
+                    where: [{ name: Like(`%${query.name || ''}%`) }]
                 })
             );
-            return new PaginationResult<Goods>(query,{
+            return new PaginationResult<Goods>(query, {
                 list,
                 total,
             });
@@ -55,11 +55,13 @@ export class GoodsService {
     }
 
     //搜索的推荐标签
-    async recommendLables(query):Promise<PaginationResult<RecommendLabels>>{
-            let [list, total] = await this.RecLabelsRepository.findAndCount();
-            return new PaginationResult<RecommendLabels>(query,{
-                list,
-                total,
-            });
+    async recommendLables(query): Promise<PaginationResult<RecommendLabels>> {
+        let [list, total] = await this.RecLabelsRepository.findAndCount(
+            new PaginationOption(query)
+        );
+        return new PaginationResult<RecommendLabels>(query, {
+            list,
+            total,
+        });
     }
 }

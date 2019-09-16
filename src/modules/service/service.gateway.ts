@@ -15,11 +15,14 @@ import {
   
     @SubscribeMessage('events')
     findAll(client: Client, data: any): Observable<WsResponse<number>> {
+      console.log(1);
+      
       return from([1, 2, 3]).pipe(map(item => ({ event: 'events', data: item })));
     }
   
     @SubscribeMessage('identity')
     async identity(client: Client, data: number): Promise<number> {
+      console.log(2);
       return data;
     }
   }

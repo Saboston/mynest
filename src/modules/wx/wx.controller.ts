@@ -1,10 +1,10 @@
 import { Controller, Get, Post, Query, Param, Body, Req, Res } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { ApiOperation,ApiUseTags } from '@nestjs/swagger';
 import { WxService } from './wx.service';
 import { reqJson,reqInterface } from '../../common/req.json';
 import { AuthService } from '../auth/auth.service'
 
-@ApiBearerAuth()
+@ApiUseTags('wx')
 @Controller('wx')
 export class WxController {
   constructor(

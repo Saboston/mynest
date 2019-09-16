@@ -26,10 +26,12 @@ export class PaginationOption {
     public skip?: number;
     public take?: number;
     public options?: object;
+    public order?: object;
 
     constructor(paginationOptions: PaginationOptionInterface, options?: object) {
         this.skip = ((paginationOptions.page - 1) || 0) * paginationOptions.limit;
         this.take = paginationOptions.limit;
+        this.order = {['id']:-1};
         this.options = Object.assign(this, options);
     }
 }

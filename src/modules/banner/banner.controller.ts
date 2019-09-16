@@ -2,9 +2,10 @@ import { Controller, Get, Query, Post, Body } from '@nestjs/common';
 import { GetBannerDto, SaveBannerDto } from './dto/banner.dto';
 import { reqJson,reqInterface } from '../../common/req.json';
 import { BannerService } from './banner.service';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation,ApiUseTags } from '@nestjs/swagger';
 import * as qiniu from 'qiniu';
 
+@ApiUseTags('banner')
 @Controller('banner')
 export class BannerController {
     constructor(private readonly bannerService: BannerService) { }

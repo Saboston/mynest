@@ -5,10 +5,11 @@ import { reqJson, reqInterface } from '../../common/req.json';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthUser } from '../../shared/decorators/user.decorator'
 import { Auth } from '../../mysql_entity/auth.entity';
-import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation,ApiUseTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from './guards/jwt-auth.guard'
 import { Response, Request } from 'express';
 
+@ApiUseTags('auth')
 @ApiBearerAuth()
 @Controller('auth')
 export class AuthController {

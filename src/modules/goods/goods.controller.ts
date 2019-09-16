@@ -2,8 +2,9 @@ import { Controller, Get, Query, Post, Body } from '@nestjs/common';
 import { reqJson,reqInterface } from '../../common/req.json';
 import { GoodsService } from './goods.service';
 import { GetGoodsDto,SearchGoodsDto } from './dto/goods.dto';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation,ApiUseTags } from '@nestjs/swagger';
 
+@ApiUseTags('goods')
 @Controller('goods')
 export class GoodsController {
     constructor(private readonly goodsService: GoodsService) { }
