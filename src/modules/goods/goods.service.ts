@@ -57,7 +57,9 @@ export class GoodsService {
     //搜索的推荐标签
     async recommendLables(query): Promise<PaginationResult<RecommendLabels>> {
         let [list, total] = await this.RecLabelsRepository.findAndCount(
-            new PaginationOption(query)
+            new PaginationOption(query,{
+                take:4,
+            })
         );
         return new PaginationResult<RecommendLabels>(query, {
             list,

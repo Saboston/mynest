@@ -22,7 +22,7 @@ export class WxController {
       if(userData){
         return new reqJson(userData)
       }else{
-        let result = await this.authService.registerUser;
+        let result = await this.authService.registerUser({openid:openid});
         return new reqJson(result)
       }
     }else{

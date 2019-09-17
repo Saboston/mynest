@@ -6,7 +6,7 @@ import { BannerModule } from './modules/banner/banner.module';
 import { GoodsModule } from './modules/goods/goods.module';
 import { WxModule } from './modules/wx/wx.module';
 import { OrderModule } from './modules/order/order.module';
-import { ServiceModule } from './modules/service/service.module';
+//import { ServiceModule } from './modules/service/service.module';
 import { ConfigModule, ConfigService } from 'nestjs-config';
 import * as path from 'path';
 
@@ -22,7 +22,7 @@ import * as path from 'path';
     GoodsModule,
     WxModule,
     OrderModule,
-    ServiceModule
+   // ServiceModule
   ],
   controllers: [],
   providers: [],
