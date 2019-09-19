@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class GoodsHomeMenu {
+export class GoodsCategoryFirst {
     //ID
     @PrimaryGeneratedColumn()
     id: number;
@@ -11,7 +11,7 @@ export class GoodsHomeMenu {
     category: number;
 
     //名称
-    @Column({ length: 40 })
+    @Column({ length: 40, unique: true })
     name: string;
 
 }

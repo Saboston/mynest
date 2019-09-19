@@ -7,7 +7,7 @@ export class Banner {
     id: number;
 
     //图片地址
-    @Column({ length: 80 })
+    @Column()
     imgUrl: string;
 
     //图片所属类别
